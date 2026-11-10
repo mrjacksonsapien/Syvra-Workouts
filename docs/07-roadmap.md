@@ -13,9 +13,9 @@ Build order: database and API are deployed **before** the front end. Each milest
 - [x] `.nvmrc` → Node 24
 
 ## M1: Database
-- [ ] `db/schema.sql` ([02-database](02-database.md))
-- [ ] `db/seed.sql` (15 exercises, 5 workouts)
-- [ ] `docker-compose.yml` with the `db` service; verify with `psql` that constraints behave (duplicate pair rejected, deleting a used exercise rejected, workout delete cascades)
+- [x] `db/schema.sql` ([02-database](02-database.md))
+- [x] `db/seed.sql` (15 exercises, 5 workouts)
+- [x] `docker-compose.yml` with the `db` service; verify with `psql` that constraints behave (duplicate pair rejected, deleting a used exercise rejected, workout delete cascades)
 
 ## M2: Shared package
 - [ ] `packages/shared`: `MUSCLE_GROUPS`, zod input schemas, response types
