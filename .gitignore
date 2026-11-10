@@ -77,6 +77,7 @@ desktop.ini
 CLAUDE.local.md
 .claude/settings.local.json
 
-# ─── Reference documents (kept out of the repo) ──────────────
+# ─── Binary documents ──────────────
 *.pdf
 docs/assets/
+.neon

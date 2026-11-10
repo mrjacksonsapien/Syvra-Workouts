@@ -3,7 +3,7 @@
 Build order: database and API are deployed **before** the front end. Each milestone ends with something runnable, committed on `develop`, and merged into `main` through a PR. Check items off as they are done.
 
 ## M0: Repository setup
-- [x] `.gitignore` (dependencies, builds, `.env*` except `.env.example`, coverage, logs, caches, hosting CLIs, editors/OS, local agent files, reference PDFs)
+- [x] `.gitignore` (dependencies, builds, `.env*` except `.env.example`, coverage, logs, caches, hosting CLIs, editors/OS, local agent files)
 - [x] GitHub repo created and connected (`origin` → `github.com/mrjacksonsapien/Syvra-Workouts`, branch `main`)
 - [x] Root `package.json` with workspaces `apps/*`, `packages/*`; `tsconfig.base.json` (strict)
 - [x] ESLint + Prettier config; root scripts (`dev`, `build:*`, `test`, `lint`, `typecheck`)
@@ -27,7 +27,7 @@ Build order: database and API are deployed **before** the front end. Each milest
 - [ ] `GET /health`
 - [ ] `api` service in docker-compose + Dockerfile
 
-## M4: Repositories (+ tests, R-TEST-1)
+## M4: Repositories (+ tests)
 - [ ] `ExerciseRepository`, `WorkoutRepository`, `WorkoutExerciseRepository`
 - [ ] Unit tests with a mocked pool
 
@@ -38,13 +38,13 @@ Build order: database and API are deployed **before** the front end. Each milest
 - [ ] Service tests; manual curl run-through of every endpoint in [03-api](03-api.md)
 
 ## M6: Deploy database + API
-- [ ] Neon project, schema + seed loaded
+- [x] Neon project, schema + seed loaded
 - [ ] Render web service, env vars, `/health` green
-- [ ] Optional: GitHub Actions CI (lint, typecheck, test)
+- [ ] ~~Optional: GitHub Actions CI (lint, typecheck, test)~~ dropped for this assignment; see [02-database](02-database.md#decision-full-reset-instead-of-migrations)
 
 ## M7: Web skeleton
 - [ ] Vite + React + TS, React Router, `AppLayout`/`NavBar`
-- [ ] `tokens.css` (brand colours from [04-frontend](04-frontend.md#brand-colours-n-4)), `global.css`
+- [ ] `tokens.css` (brand colours from [04-frontend](04-frontend.md#brand-colours)), `global.css`
 - [ ] `api/client.ts`, `useAsync`, `useMutation`, `useForm`
 - [ ] UI kit: Button, Modal, ConfirmDialog, FormField, Spinner, ErrorMessage, EmptyState
 - [ ] `web` service in docker-compose
@@ -57,7 +57,7 @@ Build order: database and API are deployed **before** the front end. Each milest
 - [ ] Workouts list + create/edit/delete
 - [ ] Workout details + add/edit/remove exercise
 
-## M10: Front-end tests (R-TEST-2)
+## M10: Front-end tests
 - [ ] `useForm`, `useAsync` hook tests
 - [ ] `ExerciseForm` component test
 
@@ -70,9 +70,8 @@ Build order: database and API are deployed **before** the front end. Each milest
 - [ ] README: live links (site, API, repo), short description, screenshots
 - [ ] **ERD** (Mermaid, copied from [02-database](02-database.md#erd))
 - [ ] **Repository pattern** explanation (short version of [01-architecture](01-architecture.md#repository-pattern))
-- [ ] **AI tools used**: which tools, for what, and how output was reviewed
 - [ ] Local setup (`docker compose up`), scripts, tests, cold-start note
 - [ ] Final responsive pass and accessibility check
 
 ## Definition of done
-Every ID in [00-requirements](00-requirements.md) is satisfied, all deliverables D-1…D-6 exist, `npm test` is green, and the deployed site passes the manual checklist in a private window.
+Every item in [00-requirements](00-requirements.md) is satisfied, `npm test` is green, and the deployed site passes the manual checklist in a private window.

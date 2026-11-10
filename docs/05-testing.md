@@ -2,7 +2,7 @@
 
 **Vitest** is the test runner for both apps: it finds `*.test.ts(x)` files, runs them in Node and reports results. Its API (`describe`, `it`, `expect`, `vi.fn()`) is the same as Jest's. For React, **React Testing Library** renders components and hooks inside **jsdom**, a simulated browser DOM running in Node.
 
-Required: tests for the **repositories** (R-TEST-1) and **at least one React component or hook** (R-TEST-2). Planned below are those, plus a few cheap extras.
+Planned: tests for the **repositories** and for **at least one React component or hook**, plus a few cheap extras.
 
 ## Layout and commands
 
