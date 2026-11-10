@@ -1,0 +1,24 @@
+services:
+  # Throwaway local PostgreSQL. Schema and seed run automatically on the first start
+  # (empty volume). Reset with: docker compose down -v
+  # The credentials below are dev-only and not secret.
+  db:
+    image: postgres:17-alpine
+    environment:
+      POSTGRES_USER: syvra
+      POSTGRES_PASSWORD: syvra
+      POSTGRES_DB: syvra
+    ports:
+      - '5432:5432'
+    volumes:
+      - db-data:/var/lib/postgresql/data
+      - ./db/schema.sql:/docker-entrypoint-initdb.d/01-schema.sql:ro
+      - ./db/seed.sql:/docker-entrypoint-initdb.d/02-seed.sql:ro
+    healthcheck:
+      test: ['CMD-SHELL', 'pg_isready -U syvra -d syvra']
+      interval: 5s
+      timeout: 5s
+      retries: 10
+
+volumes:
+  db-data:
