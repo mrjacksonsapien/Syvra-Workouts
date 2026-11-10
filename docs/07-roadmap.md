@@ -1,14 +1,16 @@
 # 07 — Roadmap
 
-Build order: database and API are deployed **before** the front end. Each milestone ends with something runnable and a commit. Check items off as they are done.
+Build order: database and API are deployed **before** the front end. Each milestone ends with something runnable, committed on `develop`, and merged into `main` through a PR. Check items off as they are done.
 
 ## M0: Repository setup
 - [x] `.gitignore` (dependencies, builds, `.env*` except `.env.example`, coverage, logs, caches, hosting CLIs, editors/OS, local agent files, reference PDFs)
 - [x] GitHub repo created and connected (`origin` → `github.com/mrjacksonsapien/Syvra-Workouts`, branch `main`)
-- [ ] Root `package.json` with workspaces `apps/*`, `packages/*`; `tsconfig.base.json` (strict)
-- [ ] ESLint + Prettier config; root scripts (`dev`, `build:*`, `test`, `lint`, `typecheck`)
+- [x] Root `package.json` with workspaces `apps/*`, `packages/*`; `tsconfig.base.json` (strict)
+- [x] ESLint + Prettier config; root scripts (`dev`, `build:*`, `test`, `lint`, `typecheck`)
 - [x] `AGENTS.md`, `CLAUDE.md`, `docs/` committed (initial commit)
-- [ ] `.nvmrc` → Node 24
+- [x] `develop` branch created; all work is committed there and reaches `main` only through PRs (see [AGENTS.md](../AGENTS.md#git-workflow))
+- [ ] Branch protection on `main` in GitHub settings (require a PR before merging, block force pushes)
+- [x] `.nvmrc` → Node 24
 
 ## M1: Database
 - [ ] `db/schema.sql` ([02-database](02-database.md))
