@@ -1,0 +1,82 @@
+# ─── Dependencies ────────────────────────────────────────────
+node_modules/
+.pnp
+.pnp.js
+.npm/
+.yarn/
+
+# ─── Build output ────────────────────────────────────────────
+dist/
+build/
+out/
+*.tsbuildinfo
+.vite/
+apps/web/dist-ssr/
+
+# ─── Environment variables & secrets ─────────────────────────
+# Real values live in the host dashboards (Render, Vercel) and in
+# local .env files. Only the .env.example templates are committed.
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+
+# ─── Tests & coverage ────────────────────────────────────────
+coverage/
+*.lcov
+.nyc_output/
+junit.xml
+test-results/
+
+# ─── Logs ────────────────────────────────────────────────────
+logs/
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# ─── Caches ──────────────────────────────────────────────────
+.cache/
+.eslintcache
+.stylelintcache
+.prettiercache
+*.cache
+
+# ─── Hosting CLIs (local link/config files) ──────────────────
+.vercel/
+.render/
+
+# ─── Local database / Docker leftovers ───────────────────────
+# Postgres data lives in a named Docker volume; these cover any
+# bind-mounted data folders or dumps created by accident.
+pgdata/
+postgres-data/
+*.dump
+*.sql.gz
+docker-compose.override.yml
+
+# ─── Editors & IDEs ──────────────────────────────────────────
+.vscode/*
+!.vscode/extensions.json
+!.vscode/settings.json
+.idea/
+*.swp
+*.swo
+*~
+
+# ─── OS files ────────────────────────────────────────────────
+.DS_Store
+Thumbs.db
+desktop.ini
+*:Zone.Identifier
+
+# ─── AI agent local files ────────────────────────────────────
+# AGENTS.md and CLAUDE.md are committed; personal/local settings are not.
+CLAUDE.local.md
+.claude/settings.local.json
+
+# ─── Reference documents (kept out of the repo) ──────────────
+*.pdf
+docs/assets/
