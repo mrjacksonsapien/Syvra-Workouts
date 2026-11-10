@@ -4,10 +4,10 @@ Build order: database and API are deployed **before** the front end. Each milest
 
 ## M0: Repository setup
 - [x] `.gitignore` (dependencies, builds, `.env*` except `.env.example`, coverage, logs, caches, hosting CLIs, editors/OS, local agent files, reference PDFs)
-- [ ] GitHub repo created and connected to this folder
+- [x] GitHub repo created and connected (`origin` → `github.com/mrjacksonsapien/Syvra-Workouts`, branch `main`)
 - [ ] Root `package.json` with workspaces `apps/*`, `packages/*`; `tsconfig.base.json` (strict)
 - [ ] ESLint + Prettier config; root scripts (`dev`, `build:*`, `test`, `lint`, `typecheck`)
-- [ ] `AGENTS.md`, `CLAUDE.md`, `docs/` committed
+- [x] `AGENTS.md`, `CLAUDE.md`, `docs/` committed (initial commit)
 - [ ] `.nvmrc` → Node 24
 
 ## M1: Database
