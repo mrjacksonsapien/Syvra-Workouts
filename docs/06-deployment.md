@@ -6,6 +6,8 @@
 
 None of the hosts need a deploy command from you. Each one is connected to the GitHub repo once (in its dashboard). From then on, **every `git push` to `main`** triggers: pull the code → run the configured **build command** → (for the API) run the **start command** → serve. This is continuous deployment.
 
+**Branches:** work happens on `develop`. Nothing is pushed to `main` directly; `main` only changes when a Pull Request `develop → main` is merged, so **merging a PR = deploying to production**. Vercel also builds a **preview URL** for `develop`, which is useful to check the front end before merging. Render only deploys `main`.
+
 | Piece | Host | What runs there | Free-plan caveat |
 |---|---|---|---|
 | Database | **Neon** | Managed PostgreSQL | Compute suspends after ~5 min idle; wakes in < 1 s on the next query |

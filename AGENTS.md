@@ -46,6 +46,14 @@ Stack: TypeScript · npm workspaces · Express 5 + `pg` (plain SQL) · PostgreSQ
 - Errors: throw `AppError` subclasses; never send responses from services.
 - Commits: small, imperative mood (`Add ExerciseRepository with tests`).
 
+## Git workflow
+
+- **Never commit directly to `main`.** `main` is the production branch: Render and Vercel deploy from it.
+- **All commits go on `develop`.** Before committing, check the current branch (`git branch --show-current`); if it is `main`, switch with `git switch develop` first.
+- **`main` only changes through Pull Requests from `develop` → `main`** (`gh pr create --base main --head develop`). Open the PR when a milestone (or a coherent chunk of one) is done and lint, typecheck and tests pass.
+- Never force-push to `main` or `develop`, and never merge locally into `main`.
+- After a PR is merged, update `develop` from `main` if they diverged (`git pull origin main` on `develop`).
+
 ## Commands (planned; available once M0 is done)
 
 ```bash
