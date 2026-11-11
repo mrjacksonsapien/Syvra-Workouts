@@ -62,16 +62,16 @@ Build order: database and API are deployed **before** the front end. Each milest
 - [x] `ExerciseForm` component test
 
 ## M11: Deploy front end
-- [ ] Vercel project, `VITE_API_URL`, SPA rewrite
-- [ ] Update Render `CORS_ORIGIN`
-- [ ] Manual checklist in a private window, on desktop and phone
+- [x] Vercel project, `VITE_API_URL`, SPA rewrite
+- [x] Update Render `CORS_ORIGIN`
+- [x] Manual checklist in a private window, on desktop and phone
 
 ## M12: README and polish
-- [ ] README: live links (site, API, repo), short description, screenshots
-- [ ] **ERD** (Mermaid, copied from [02-database](02-database.md#erd))
-- [ ] **Repository pattern** explanation (short version of [01-architecture](01-architecture.md#repository-pattern))
-- [ ] Local setup (`docker compose up`), scripts, tests, cold-start note
-- [ ] Final responsive pass and accessibility check
+- [x] README: live links (site, API, repo), short description
+- [x] **ERD** (Mermaid, copied from [02-database](02-database.md#erd))
+- [x] **Repository pattern** explanation (short version of [01-architecture](01-architecture.md#repository-pattern))
+- [x] Local setup (`docker compose up`), scripts, tests, cold-start note
+- [x] Final responsive pass and accessibility check
 
 ## Definition of done
 Every item in [00-requirements](00-requirements.md) is satisfied, `npm test` is green, and the deployed site passes the manual checklist in a private window.

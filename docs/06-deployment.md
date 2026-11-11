@@ -33,7 +33,7 @@ Secrets live **only** in each host's dashboard (and in local `.env` files, which
 | `CORS_ORIGIN` | Render (API) | `https://syvra-workouts.vercel.app` | Exact Vercel URL; comma-separated if several |
 | `NODE_ENV` | Render (API) | `production` | |
 | `PORT` | Render (API) | set by Render | Local default 3000 |
-| `VITE_API_URL` | Vercel (web) | `https://syvra-workouts-api.onrender.com` | **Public**: embedded into the JS bundle at build time, so never put secrets in `VITE_*` variables |
+| `VITE_API_URL` | Vercel (web) | `https://syvra-workouts.onrender.com` | **Public**: embedded into the JS bundle at build time, so never put secrets in `VITE_*` variables |
 
 `apps/api/src/config/env.ts` validates these with zod at startup and **crashes early** with a clear message if one is missing.
 
