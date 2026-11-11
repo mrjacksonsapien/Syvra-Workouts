@@ -68,11 +68,10 @@ Build order: database and API are deployed **before** the front end. Each milest
 
 ## M12: README and polish
 - [x] README: live links (site, API, repo), short description
-- [ ] README screenshots
 - [x] **ERD** (Mermaid, copied from [02-database](02-database.md#erd))
 - [x] **Repository pattern** explanation (short version of [01-architecture](01-architecture.md#repository-pattern))
 - [x] Local setup (`docker compose up`), scripts, tests, cold-start note
-- [ ] Final responsive pass and accessibility check
+- [x] Final responsive pass and accessibility check
 
 ## Definition of done
 Every item in [00-requirements](00-requirements.md) is satisfied, `npm test` is green, and the deployed site passes the manual checklist in a private window.
