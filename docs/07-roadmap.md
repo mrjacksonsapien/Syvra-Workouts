@@ -43,11 +43,11 @@ Build order: database and API are deployed **before** the front end. Each milest
 - [ ] ~~Optional: GitHub Actions CI (lint, typecheck, test)~~ dropped for this assignment; see [02-database](02-database.md#decision-full-reset-instead-of-migrations)
 
 ## M7: Web skeleton
-- [ ] Vite + React + TS, React Router, `AppLayout`/`NavBar`
-- [ ] `tokens.css` (brand colours from [04-frontend](04-frontend.md#brand-colours)), `global.css`
-- [ ] `api/client.ts`, `useAsync`, `useMutation`, `useForm`
-- [ ] UI kit: Button, Modal, ConfirmDialog, FormField, Spinner, ErrorMessage, EmptyState
-- [ ] `web` service in docker-compose
+- [x] Vite + React + TS, React Router, `AppLayout`/`NavBar`
+- [x] `tokens.css` (brand colours from [04-frontend](04-frontend.md#brand-colours)), `global.css`
+- [x] `api/client.ts`, `useAsync`, `useMutation`, `useForm`
+- [x] UI kit: Button, Modal, ConfirmDialog, FormField, Spinner, ErrorMessage, EmptyState
+- [x] `web` service in docker-compose
 
 ## M8: Exercises pages
 - [ ] Exercises list + filter (URL param) + create/edit/delete (409 handled)

@@ -1,0 +1,25 @@
+:root {
+  --color-primary: #006785; /* Syvra teal: primary buttons, links, active nav, headings */
+  --color-primary-hover: #00526a; /* derived deep teal: hover/pressed */
+  --color-accent: #78d3cf; /* Syvra mint: highlights, active filter chip, badges */
+  --color-accent-light: #aee9d8; /* Syvra light mint: subtle backgrounds, selected rows */
+  --gradient-accent: linear-gradient(90deg, var(--color-accent), var(--color-accent-light));
+  --color-bg: #f9f9f9; /* page background */
+  --color-surface: #ffffff; /* cards, modals */
+  --color-text: #1d2b33;
+  --color-text-muted: #5b6b73;
+  --color-border: #d5dde1;
+  --color-danger: #c0392b; /* delete actions, errors */
+  --radius: 8px;
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 16px;
+  --space-4: 24px;
+  --space-5: 32px;
+  --touch-target: 44px;
+  --container-width: 1100px;
+  --font-family: 'Poppins', system-ui, sans-serif;
+}
+
+/* Breakpoints (CSS variables cannot be used inside media queries, so they are written out):
+   tablet: min-width 640px · desktop: min-width 1024px */

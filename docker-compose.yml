@@ -38,5 +38,21 @@ services:
       db:
         condition: service_healthy
 
+  # Vite dev server with hot reload. http://localhost:5173
+  web:
+    build:
+      context: .
+      dockerfile: apps/web/Dockerfile
+      target: dev
+    environment:
+      VITE_API_URL: http://localhost:3000
+    ports:
+      - '5173:5173'
+    volumes:
+      - ./apps/web/src:/app/apps/web/src
+      - ./apps/web/index.html:/app/apps/web/index.html
+    depends_on:
+      - api
+
 volumes:
   db-data:
