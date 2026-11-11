@@ -32,10 +32,10 @@ Build order: database and API are deployed **before** the front end. Each milest
 - [x] Unit tests with a mocked pool
 
 ## M5: Services, controllers, routes
-- [ ] Exercises CRUD + `/exercises/:id/workouts`
-- [ ] Workouts CRUD (details include exercises)
-- [ ] Workout-exercise add/edit/remove
-- [ ] Service tests; manual curl run-through of every endpoint in [03-api](03-api.md)
+- [x] Exercises CRUD + `/exercises/:id/workouts`
+- [x] Workouts CRUD (details include exercises)
+- [x] Workout-exercise add/edit/remove
+- [x] Service tests; manual curl run-through of every endpoint in [03-api](03-api.md)
 
 ## M6: Deploy database + API
 - [x] Neon project, schema + seed loaded
