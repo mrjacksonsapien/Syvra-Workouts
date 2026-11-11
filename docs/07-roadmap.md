@@ -39,7 +39,7 @@ Build order: database and API are deployed **before** the front end. Each milest
 
 ## M6: Deploy database + API
 - [x] Neon project, schema + seed loaded
-- [ ] Render web service, env vars, `/health` green
+- [x] Render web service, env vars, `/health` green
 - [ ] ~~Optional: GitHub Actions CI (lint, typecheck, test)~~ dropped for this assignment; see [02-database](02-database.md#decision-full-reset-instead-of-migrations)
 
 ## M7: Web skeleton
