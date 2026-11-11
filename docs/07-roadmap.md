@@ -62,9 +62,9 @@ Build order: database and API are deployed **before** the front end. Each milest
 - [x] `ExerciseForm` component test
 
 ## M11: Deploy front end
-- [ ] Vercel project, `VITE_API_URL`, SPA rewrite
-- [ ] Update Render `CORS_ORIGIN`
-- [ ] Manual checklist in a private window, on desktop and phone
+- [x] Vercel project, `VITE_API_URL`, SPA rewrite
+- [x] Update Render `CORS_ORIGIN`
+- [x] Manual checklist in a private window, on desktop and phone
 
 ## M12: README and polish
 - [ ] README: live links (site, API, repo), short description, screenshots
