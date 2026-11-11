@@ -1,6 +1,6 @@
 # 02 — Database
 
-PostgreSQL 17. Hosted on **Neon** in production, run in **Docker** locally. The source of truth is `db/schema.sql` (deliverable D-4), with fictional data in `db/seed.sql`.
+PostgreSQL 18. Hosted on **Neon** in production, run in **Docker** locally. The source of truth is `db/schema.sql`, with fictional data in `db/seed.sql`.
 
 ## ERD
 
@@ -44,7 +44,7 @@ erDiagram
 
 ## Conventions
 
-- Table names: **plural, `snake_case`** (`workouts`, `exercises`). The junction table combines both names, `workout_exercises` ("a workout's exercises"), as specified in the requirements.
+- Table names: **plural, `snake_case`** (`workouts`, `exercises`). The junction table combines both names, `workout_exercises` ("a workout's exercises"), as listed in the requirements.
 - Columns: `snake_case` in SQL; repositories map them to `camelCase` in TypeScript (`muscle_group` → `muscleGroup`).
 - Primary keys: `id INTEGER GENERATED ALWAYS AS IDENTITY` (the modern SQL-standard version of `SERIAL`).
 - Timestamps: `TIMESTAMPTZ` (stored in UTC), `created_at` / `updated_at` default `now()`.
@@ -66,7 +66,7 @@ erDiagram
 Allowed `muscle_group` values (also exported as `MUSCLE_GROUPS` from `@syvra/shared`):
 `chest`, `back`, `legs`, `shoulders`, `arms`, `core`, `full_body`.
 
-*Why a CHECK constraint and not a fourth table:* the requirements specify exactly three tables, and the list is small and stable. Postgres refuses any other value. Supporting several groups per exercise would need another many-to-many table (out of scope).
+*Why a CHECK constraint and not a fourth table:* the design has exactly three tables, and the list is small and stable. Postgres refuses any other value. Supporting several groups per exercise would need another many-to-many table (out of scope).
 
 ### `workouts`
 
@@ -91,12 +91,12 @@ Allowed `muscle_group` values (also exported as `MUSCLE_GROUPS` from `@syvra/sha
 | `rest_seconds` | smallint | nullable, CHECK 0–600 | rest between sets |
 | `position` | smallint | NOT NULL, CHECK ≥ 1 | display order in the workout |
 | `created_at`, `updated_at` | timestamptz | NOT NULL, default now() | |
-| — | — | **UNIQUE (`workout_id`, `exercise_id`)** | the "unique pair" (R-DB-4) |
+| — | — | **UNIQUE (`workout_id`, `exercise_id`)** | the "unique pair" |
 
 ## Key rules explained
 
 ### The unique pair
-`UNIQUE (workout_id, exercise_id)` means an exercise can appear **at most once** per workout. It is a requirement (R-DB-4). It also makes `(workoutId, exerciseId)` a natural identifier, so the API addresses a link as `/api/workouts/:workoutId/exercises/:exerciseId`. Its index also speeds up "all exercises of workout X" queries.
+`UNIQUE (workout_id, exercise_id)` means an exercise can appear **at most once** per workout. It is a rule of the data model. It also makes `(workoutId, exerciseId)` a natural identifier, so the API addresses a link as `/api/workouts/:workoutId/exercises/:exerciseId`. Its index also speeds up "all exercises of workout X" queries.
 
 ### Delete behaviour
 | Action | Effect | Mechanism |
@@ -213,4 +213,14 @@ This gives exercises used in several workouts (Push-Up, Pull-Up, Back Squat, Ove
 ## Running the SQL
 
 - **Locally (Docker):** automatic on the first `docker compose up`; reset with `docker compose down -v`.
-- **Neon:** `psql "$DATABASE_URL" -f db/schema.sql && psql "$DATABASE_URL" -f db/seed.sql`, or paste the files into Neon's SQL Editor. Also exposed as the root script `npm run db:reset` (reads `DATABASE_URL`).
+- **Neon:** `psql "$DATABASE_URL" -f db/schema.sql && psql "$DATABASE_URL" -f db/seed.sql`, or paste the files into Neon's SQL Editor.
+
+## Decision: full reset instead of migrations
+
+The project has no migration tool. Changes to tables or data are made by editing `db/schema.sql` or `db/seed.sql` and re-running them. There is no CI job that changes the database.
+
+- **Why:** this is a small project with fictional data. A reset is simple, always gives the same result, and avoids a migration runner, a `schema_migrations` table and a CI job, which would add more to build and explain than the project needs.
+- **Cost:** `schema.sql` drops and recreates the tables, so every run deletes all data, including anything written in production. Changing the structure or the seed always means a reset.
+- **When this would change:** once there are real users whose data must survive a change, the schema would move to numbered migrations (`db/migrations/001_…sql`) applied by CI on `main`. The seed would stay dev-only.
+
+To change the schema or seed on Neon: edit the file, then run the two `psql` commands above against `DATABASE_URL_UNPOOLED`. Tell users the data resets when this happens.

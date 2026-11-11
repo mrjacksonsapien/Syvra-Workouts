@@ -25,15 +25,15 @@ The browser downloads the React app from Vercel, then the app calls the API on R
 
 | Concern | Choice | Why |
 |---|---|---|
-| Language | **TypeScript** (strict) everywhere | Nice-to-have N-1; catches errors early |
+| Language | **TypeScript** (strict) everywhere | Catches errors early |
 | Runtime | **Node.js 24 LTS** | Current LTS |
 | Repo layout | **One Git repo, npm workspaces** | Small project, one link to review, shared code without copy-paste |
 | API | **Express 5** | Standard and minimal; v5 forwards errors thrown in `async` handlers to the error middleware natively |
 | DB access | **`pg` (node-postgres) with plain, parameterised SQL** | Shows real SQL (JOINs, constraints); no ORM magic to explain |
-| Database | **PostgreSQL 17** (Neon online, Docker locally) | Robust, standard relational database |
+| Database | **PostgreSQL 18** (Neon online, Docker locally) | Robust, standard relational database |
 | Validation | **zod** in `packages/shared` | One schema, used by the forms *and* the API |
 | Front end | **React + Vite + React Router** | Fast dev server and build; standard routing |
-| Data fetching | **Own custom hooks** (no TanStack Query) | Fulfils R-FE-3 visibly; fewer libraries to explain |
+| Data fetching | **Own custom hooks** (no TanStack Query) | Shows the hook pattern directly; fewer libraries to explain |
 | Styling | **CSS Modules + CSS variables** | Plain CSS, scoped per component, no new framework |
 | Tests | **Vitest** (+ React Testing Library, jsdom) | One runner for both apps; Jest-compatible API |
 | Local dev | **Docker Compose** (Postgres + API + web) | Disposable local database, one-command startup |
@@ -72,7 +72,7 @@ syvra-workouts/
 ├── packages/
 │   └── shared/                   # @syvra/shared: zod schemas + TS types + constants
 ├── db/
-│   ├── schema.sql                # tables, constraints, trigger (deliverable D-4)
+│   ├── schema.sql                # tables, constraints, trigger
 │   └── seed.sql                  # 15 exercises, 5 workouts
 ├── docs/                         # this documentation
 ├── docker-compose.yml
@@ -80,7 +80,7 @@ syvra-workouts/
 ├── package.json                  # workspaces + root scripts
 ├── tsconfig.base.json
 ├── AGENTS.md / CLAUDE.md         # instructions for AI coding agents
-└── README.md                     # links, ERD, Repository pattern, AI tools
+└── README.md                     # links, ERD, Repository pattern, setup
 ```
 
 ### npm workspaces (the *Git* repository's organisation)
@@ -115,7 +115,7 @@ flowchart TB
 | **Service** | Business rules ("an exercise used in workouts can't be deleted", "the workout must exist before adding an exercise") | `req`/`res`, SQL |
 | **Repository** | SQL, mapping rows (`snake_case`) to objects (`camelCase`) | Business rules, HTTP |
 
-Rule R-PAT-2 is enforced by structure: only `repositories/` imports the pool.
+The rule that routes never query the database is enforced by structure: only `repositories/` imports the pool.
 
 ### Example flow: `DELETE /api/exercises/4`
 
@@ -160,7 +160,7 @@ Every class receives its dependencies through its constructor, so tests pass fak
 
 All SQL uses **parameterised queries** (`WHERE id = $1`, values passed separately), which prevents SQL injection.
 
-**Why no ORM:** an ORM (e.g. Prisma) would also work; repositories would then call `prisma.exercise.findMany()` instead of SQL. We chose plain SQL because the project is meant to showcase relational database design (many-to-many, foreign keys, unique pair), `schema.sql` directly fulfils deliverable D-4, and every query can be explained line by line.
+**Why no ORM:** an ORM (e.g. Prisma) would also work; repositories would then call `prisma.exercise.findMany()` instead of SQL. We chose plain SQL because relational design (many-to-many, foreign keys, unique pair) is the core of this project, `schema.sql` is the whole schema in one readable file, and every query can be explained line by line.
 
 ## Validation and the shared package
 
@@ -197,7 +197,7 @@ Details in [03-api](03-api.md#error-format).
 
 | Service | Image | Purpose |
 |---|---|---|
-| `db` | `postgres:17-alpine` | Throwaway local DB. `db/schema.sql` and `db/seed.sql` are mounted into `/docker-entrypoint-initdb.d/` so they run automatically on first start. Health-checked with `pg_isready`. |
+| `db` | `postgres:18-alpine` | Throwaway local DB. `db/schema.sql` and `db/seed.sql` are mounted into `/docker-entrypoint-initdb.d/` so they run automatically on first start. Health-checked with `pg_isready`. |
 | `api` | built from `apps/api/Dockerfile` (dev stage) | Runs `tsx watch src/server.ts` with the source bind-mounted; `DATABASE_URL=postgres://syvra:syvra@db:5432/syvra`. Starts after `db` is healthy. |
 | `web` | Node image | Runs `vite --host` with the source bind-mounted; `VITE_API_URL=http://localhost:3000`. |
 
@@ -225,7 +225,7 @@ Migration path: move `api/` and `hooks/` into a new `packages/client` workspace,
 | # | Decision | Alternatives considered | Reason |
 |---|---|---|---|
 | 1 | One Git repo with npm workspaces | One repo per service | Small scope; one link; shared validation |
-| 2 | TypeScript everywhere | JavaScript | Nice-to-have; safer refactors |
+| 2 | TypeScript everywhere | JavaScript | Safer refactors |
 | 3 | Plain SQL with `pg` | Prisma, Drizzle | Shows SQL skills; Repository pattern clearly needed |
 | 4 | Routes → controllers → services → repositories | No service layer | Keeps business rules out of HTTP code; testable |
 | 5 | zod in a shared package | Separate validation per app | One contract, no drift |

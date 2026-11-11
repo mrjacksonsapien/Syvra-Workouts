@@ -1,6 +1,6 @@
 # 06 — Deployment
 
-> The deployed URLs are the deliverable (R-DEP-3): the app must work online. Recommended order: **database → API → front end**.
+> The app must work online. Recommended order: **database → API → front end**.
 
 ## How deployment works
 
@@ -45,16 +45,15 @@ Secrets live **only** in each host's dashboard (and in local `.env` files, which
   "build:shared": "npm run build -w packages/shared",
   "build:api":    "npm run build:shared && npm run build -w apps/api",
   "build:web":    "npm run build:shared && npm run build -w apps/web",
-  "start:api":    "npm run start -w apps/api",
-  "db:reset":     "psql \"$DATABASE_URL\" -f db/schema.sql && psql \"$DATABASE_URL\" -f db/seed.sql"
+  "start:api":    "npm run start -w apps/api"
 }
 ```
 
 ## Step 1: Database (Neon)
 
-1. Create a Neon project (region close to the Render region, e.g. AWS `us-east`), Postgres 17.
+1. Create a Neon project (region close to the Render region, e.g. AWS `us-east`), Postgres 18.
 2. Copy the **pooled** connection string.
-3. Load schema + seed, either with `DATABASE_URL='…' npm run db:reset` (needs `psql` locally, or `docker run --rm postgres:17-alpine psql …`) or by pasting `db/schema.sql` then `db/seed.sql` into the Neon SQL Editor.
+3. Load schema + seed, either with `psql "$DATABASE_URL" -f db/schema.sql` then `psql "$DATABASE_URL" -f db/seed.sql` (needs `psql` locally, or `docker run --rm postgres:18-alpine psql …`) or by pasting `db/schema.sql` then `db/seed.sql` into the Neon SQL Editor.
 4. Check: `SELECT count(*) FROM exercises;` → 15.
 
 ## Step 2: API (Render)
@@ -83,7 +82,7 @@ The pg `Pool` uses SSL (Neon requires it; `sslmode=require` in the URL) and a sm
 
 1. Set Render's `CORS_ORIGIN` to the Vercel production URL → Render redeploys.
 2. Open the site in a **private window**, then run the manual checklist in [05-testing](05-testing.md#manual-end-to-end-checklist-before-release).
-3. Put the three links at the top of the README (D-1, D-2, D-3).
+3. Put the three links at the top of the README.
 
 ## Before sharing the links
 - Hit `/health` a minute before sending the links (or mention the cold start in the README) so the first visitor doesn't wait for Render to wake up.
@@ -93,7 +92,7 @@ The pg `Pool` uses SSL (Neon requires it; `sslmode=require` in the URL) and a sm
 
 | | Local | Production |
 |---|---|---|
-| DB | Docker `postgres:17-alpine`, user `syvra` / `syvra` (dev-only, not secret) | Neon |
+| DB | Docker `postgres:18-alpine`, user `syvra` / `syvra` (dev-only, not secret) | Neon |
 | API | `docker compose up` or `npm run dev -w apps/api` (tsx watch) on :3000 | Render |
 | Web | `docker compose up` or `npm run dev -w apps/web` (Vite) on :5173 | Vercel |
 | Config | `.env` files (gitignored), compose `environment:` | Host dashboards |

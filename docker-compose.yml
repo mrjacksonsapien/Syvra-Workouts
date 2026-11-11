@@ -3,7 +3,7 @@ services:
   # (empty volume). Reset with: docker compose down -v
   # The credentials below are dev-only and not secret.
   db:
-    image: postgres:17-alpine
+    image: postgres:18-alpine
     environment:
       POSTGRES_USER: syvra
       POSTGRES_PASSWORD: syvra

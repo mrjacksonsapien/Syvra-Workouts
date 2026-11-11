@@ -28,14 +28,14 @@ Dependency direction: `pages → components → hooks → api → @syvra/shared`
 
 ## Routes
 
-| Path | Page | Requirement |
-|---|---|---|
-| `/` | redirect → `/workouts` | |
-| `/exercises` | `ExercisesPage` | R-FE-4 |
-| `/exercises/:id` | `ExerciseDetailsPage` | R-FE-5 |
-| `/workouts` | `WorkoutsPage` | R-FE-6 |
-| `/workouts/:id` | `WorkoutDetailsPage` | R-FE-7 |
-| `*` | `NotFoundPage` | |
+| Path | Page |
+|---|---|
+| `/` | redirect → `/workouts` |
+| `/exercises` | `ExercisesPage` |
+| `/exercises/:id` | `ExerciseDetailsPage` |
+| `/workouts` | `WorkoutsPage` |
+| `/workouts/:id` | `WorkoutDetailsPage` |
+| `*` | `NotFoundPage` |
 
 The root `vercel.json` rewrites every path to `index.html`, so refreshing `/workouts/3` works on Vercel.
 
@@ -62,7 +62,7 @@ The root `vercel.json` rewrites every path to `index.html`, so refreshing `/work
 - Per row: **Edit** (modal with `WorkoutExerciseForm`: sets, reps, weight, rest, position) and **Remove** (confirm).
 - **Add exercise**: modal with an exercise `<select>` (exercises already in the workout are excluded), plus sets/reps/weight/rest.
 
-### Common to every page (nice-to-have N-3)
+### Common to every page
 - **Loading:** `Spinner` while the first request is pending.
 - **Error:** `ErrorMessage` with the API message and a "Retry" button (calls `reload()` from the hook). A 404 shows "Not found" with a link back to the list.
 - **Empty:** `EmptyState` with a call to action ("No workouts yet. Create one").
@@ -70,7 +70,7 @@ The root `vercel.json` rewrites every path to `index.html`, so refreshing `/work
 
 ## Custom hooks
 
-R-FE-3 needs at least one; the data layer is built entirely from custom hooks.
+The data layer is built entirely from custom hooks.
 
 | Hook | Returns | Purpose |
 |---|---|---|
@@ -90,7 +90,7 @@ After a successful mutation, the page calls `reload()` on the affected query hoo
 - `request<T>(path, options)`: sets JSON headers, parses JSON, returns `undefined` on 204, and throws `ApiError { status, code, message, details }` built from the API's error format. Network failures become `ApiError(0, 'NETWORK_ERROR', 'Cannot reach the server')`.
 - Because Render's free tier sleeps, the first request can take about 30–60 s. While loading takes longer than about 5 s, `Spinner` shows the hint *"Waking up the server, this can take up to a minute…"*.
 
-## Forms and validation (nice-to-have N-2)
+## Forms and validation
 
 - Forms use the **same zod schemas** as the API, from `@syvra/shared` (e.g. `exerciseInputSchema`).
 - Validation runs on submit and then on change for fields already touched; errors show under each `FormField` (`aria-invalid`, `aria-describedby`).
@@ -103,7 +103,7 @@ After a successful mutation, the page calls `reload()` on the affected query hoo
 - `styles/tokens.css` defines global **CSS custom properties** (variables), used everywhere as `var(--color-primary)`.
 - No CSS framework, no CSS-in-JS.
 
-### Brand colours (N-4)
+### Brand colours
 
 Taken from the fill colours of Syvra's logo (the logo file is not kept in the repo).
 
@@ -138,9 +138,8 @@ The logo's mint gradient (`#78D3CF → #AEE9D8`) may be reused as a subtle CSS `
 ```
 Contrast: white text on `--color-primary` is about 6.4:1, which passes WCAG AA (the accessibility guidelines' contrast standard). The mints are only used behind dark text or as decoration, never as text on white (too low contrast).
 
-Style cues from the reference, to imitate with plain CSS (not the logo itself): a thin teal rule under the header, generous white space, a geometric sans-serif font, small mint accents.
 
-## Responsive design (R-FE-2)
+## Responsive design
 
 - **Mobile-first:** base styles target a ~360 px phone; media queries add layout for larger screens.
 - Breakpoints: `min-width: 640px` (tablet) and `min-width: 1024px` (desktop).

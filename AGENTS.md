@@ -6,7 +6,7 @@ Instructions for AI coding agents working in this repository. (Claude Code reads
 
 **Syvra Workouts**: a small full-stack web app. Users manage **exercises** and **workouts**; a workout contains many exercises, each with its own sets/reps/weight/rest (many-to-many via `workout_exercises`).
 
-Stack: TypeScript · npm workspaces · Express 5 + `pg` (plain SQL) · PostgreSQL 17 · React + Vite + React Router · CSS Modules · zod · Vitest · Docker Compose (local) · Neon / Render / Vercel (production).
+Stack: TypeScript · npm workspaces · Express 5 + `pg` (plain SQL) · PostgreSQL 18 · React + Vite + React Router · CSS Modules · zod · Vitest · Docker Compose (local) · Neon / Render / Vercel (production).
 
 **Status:** planning done, implementation not started. Follow [docs/07-roadmap.md](docs/07-roadmap.md).
 
@@ -14,7 +14,7 @@ Stack: TypeScript · npm workspaces · Express 5 + `pg` (plain SQL) · PostgreSQ
 
 | Task | Read |
 |---|---|
-| What must be delivered / scope questions | [docs/00-requirements.md](docs/00-requirements.md) |
+| Scope and feature questions | [docs/00-requirements.md](docs/00-requirements.md) |
 | Folder layout, layers, patterns, decisions | [docs/01-architecture.md](docs/01-architecture.md) |
 | Schema, constraints, seed data | [docs/02-database.md](docs/02-database.md) |
 | Endpoints, payloads, error codes | [docs/03-api.md](docs/03-api.md) |
