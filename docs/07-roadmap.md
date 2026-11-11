@@ -18,8 +18,8 @@ Build order: database and API are deployed **before** the front end. Each milest
 - [x] `docker-compose.yml` with the `db` service; verify with `psql` that constraints behave (duplicate pair rejected, deleting a used exercise rejected, workout delete cascades)
 
 ## M2: Shared package
-- [ ] `packages/shared`: `MUSCLE_GROUPS`, zod input schemas, response types
-- [ ] Schema tests
+- [x] `packages/shared`: `MUSCLE_GROUPS`, zod input schemas, response types
+- [x] Schema tests
 
 ## M3: API skeleton
 - [ ] `config/env.ts`, `db/pool.ts`, `app.ts` (`createApp`), `server.ts`
