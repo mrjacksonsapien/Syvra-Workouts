@@ -7,7 +7,7 @@ React + TypeScript + Vite + React Router, in `apps/web`. One **responsive web ap
 ```
 apps/web/src/
 ├── main.tsx                 # mounts <App/>, imports global CSS
-├── App.tsx                  # router + layout
+├── App.tsx                  # route table + layout (<BrowserRouter> is in main.tsx)
 ├── api/                     # NO React. Plain functions that call the API.
 │   ├── client.ts            # fetch wrapper: base URL, JSON, ApiError
 │   ├── exercises.ts         # listExercises(filter), getExercise(id), createExercise(...)...
