@@ -54,8 +54,8 @@ Build order: database and API are deployed **before** the front end. Each milest
 - [x] Exercise details + workouts using it
 
 ## M9: Workouts pages
-- [ ] Workouts list + create/edit/delete
-- [ ] Workout details + add/edit/remove exercise
+- [x] Workouts list + create/edit/delete
+- [x] Workout details + add/edit/remove exercise
 
 ## M10: Front-end tests
 - [ ] `useForm`, `useAsync` hook tests

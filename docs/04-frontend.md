@@ -17,7 +17,7 @@ apps/web/src/
 │   ├── layout/              # AppLayout, NavBar
 │   ├── ui/                  # Button, Modal, ConfirmDialog, FormField, Spinner, ErrorMessage, EmptyState, Badge
 │   ├── exercises/           # ExerciseCard, ExerciseForm, MuscleGroupFilter
-│   └── workouts/            # WorkoutCard, WorkoutForm, WorkoutExerciseRow, WorkoutExerciseForm
+│   └── workouts/            # WorkoutCard, WorkoutForm, WorkoutExerciseRow, Add/EditWorkoutExerciseForm (shared WorkoutExerciseFields)
 ├── pages/                   # one per route; composes hooks + components
 └── styles/
     ├── tokens.css           # CSS variables: brand colours, spacing, radius, breakpoints
@@ -55,6 +55,8 @@ The root `vercel.json` rewrites every path to `index.html`, so refreshing `/work
 ### Workouts (`/workouts`)
 - List of `WorkoutCard`s: name, scheduled date (formatted, or "Unscheduled"), exercise count.
 - Create (modal `WorkoutForm`), Edit, Delete (`ConfirmDialog` warning that its exercise list is removed too).
+
+**Exercises in the workout form.** The create/edit modal also contains the workout's exercise list (`WorkoutExercisesPanel`: add, edit, remove). Name, date and description are saved with **Save**; exercise changes are saved **immediately** (the modal says so). When creating, the first Save creates the workout and keeps the modal open, so the exercises can be added right after; the button then reads "Close". Closing the modal reloads the list.
 
 ### Workout details (`/workouts/:id`)
 - Header: name, date, description; Edit / Delete workout.

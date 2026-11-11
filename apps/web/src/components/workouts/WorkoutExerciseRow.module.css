@@ -1,0 +1,40 @@
+/* Narrow container (phone, or inside a modal): stacked card. Wide container: aligned columns.
+   It reacts to the width of the list, not the screen, because the same row is used in the
+   workout modal. */
+.row {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+  padding: var(--space-3);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius);
+  background: var(--color-surface);
+  list-style: none;
+}
+
+.name {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-2);
+  font-weight: 600;
+}
+
+.numbers {
+  margin: 0;
+  color: var(--color-text-muted);
+}
+
+.actions {
+  display: flex;
+  gap: var(--space-2);
+}
+
+@container (min-width: 560px) {
+  .row {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) 200px auto;
+    align-items: center;
+    gap: var(--space-3);
+  }
+}

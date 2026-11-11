@@ -236,3 +236,24 @@ Migration path: move `api/` and `hooks/` into a new `packages/client` workspace,
 | 10 | Integer identity IDs | UUIDs | Simple; enough for this scale |
 | 11 | `updated_at` maintained by a DB trigger | Set in each UPDATE query | Means "row last changed"; can't be forgotten |
 | 12 | Block deletion of exercises in use (409) | Cascade | Avoid silently altering workouts |
+| 13 | Workout exercises are edited through their own endpoints, saved immediately ([details](#decision-workout-exercises-saved-immediately-not-with-the-workout)) | Save the workout and its exercises together in one transaction | Much smaller change, deadline; no new transaction code |
+
+## Decision: workout exercises saved immediately, not with the workout
+
+The workout create/edit modal shows the workout's exercises and lets the user add, edit and remove them. Two designs were considered.
+
+**A: separate endpoints, saved immediately (chosen).** The modal reuses `POST/PUT/DELETE /api/workouts/:id/exercises/...`. Each add, edit or remove is sent as soon as it is confirmed. Name, date and description are saved with the form's Save button. When creating, the first Save creates the workout and keeps the modal open, because the exercise endpoints need a workout id.
+
+**B: one atomic save (rejected for now).** `POST` and `PUT /api/workouts` would accept an `exercises` array and write the workout and its lines in one database transaction; the form would edit a local draft, and Cancel would really discard everything.
+
+Why A:
+- **Time.** B touches about 12 to 15 files (shared schemas, a transactional `WorkoutRepository.save`, service rules, removal of the per-exercise endpoints, rewritten tests, the form, the docs). A needed only front-end changes.
+- **Simplicity** (AGENTS.md rule 10). A adds no transaction code and keeps the repository pattern as it is. B writes `workout_exercises` from `WorkoutRepository`, which is a small bend of "one repository per table", and needs a connection shared by several queries.
+- **Staleness.** With a draft (B), an exercise deleted by someone else while the form is open makes the save fail, so B needs a dedicated error (`EXERCISE_NO_LONGER_EXISTS`) and UI to handle it. With A each action is its own request, so a deleted exercise gives one ordinary 404 on that action.
+
+Known trade-offs of A:
+- **Cancel does not undo exercise changes.** The button reads "Close" once a workout exists, and the modal says "Exercise changes are saved immediately."
+- **Creating is two steps:** save the workout, then add its exercises.
+- **No atomicity:** a workout and its exercises are never saved in one transaction. Each request is valid on its own, so the data stays consistent, but a failure between two requests leaves a partly edited workout.
+
+Revisit B if one-step saving or a working Cancel becomes a requirement. The endpoints, schemas and the transaction in `WorkoutRepository` are the parts that would change; the layers stay the same.
