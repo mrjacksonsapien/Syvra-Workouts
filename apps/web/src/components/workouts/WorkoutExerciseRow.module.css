@@ -1,0 +1,38 @@
+/* Phone: stacked card. Tablet and up: aligned columns. */
+.row {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+  padding: var(--space-3);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius);
+  background: var(--color-surface);
+  list-style: none;
+}
+
+.name {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-2);
+  font-weight: 600;
+}
+
+.numbers {
+  margin: 0;
+  color: var(--color-text-muted);
+}
+
+.actions {
+  display: flex;
+  gap: var(--space-2);
+}
+
+@media (min-width: 640px) {
+  .row {
+    display: grid;
+    grid-template-columns: 1fr 200px auto;
+    align-items: center;
+    gap: var(--space-3);
+  }
+}

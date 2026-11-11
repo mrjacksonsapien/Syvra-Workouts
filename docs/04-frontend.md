@@ -17,7 +17,7 @@ apps/web/src/
 │   ├── layout/              # AppLayout, NavBar
 │   ├── ui/                  # Button, Modal, ConfirmDialog, FormField, Spinner, ErrorMessage, EmptyState, Badge
 │   ├── exercises/           # ExerciseCard, ExerciseForm, MuscleGroupFilter
-│   └── workouts/            # WorkoutCard, WorkoutForm, WorkoutExerciseRow, WorkoutExerciseForm
+│   └── workouts/            # WorkoutCard, WorkoutForm, WorkoutExerciseRow, Add/EditWorkoutExerciseForm (shared WorkoutExerciseFields)
 ├── pages/                   # one per route; composes hooks + components
 └── styles/
     ├── tokens.css           # CSS variables: brand colours, spacing, radius, breakpoints
