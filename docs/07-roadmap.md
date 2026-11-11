@@ -58,8 +58,8 @@ Build order: database and API are deployed **before** the front end. Each milest
 - [x] Workout details + add/edit/remove exercise
 
 ## M10: Front-end tests
-- [ ] `useForm`, `useAsync` hook tests
-- [ ] `ExerciseForm` component test
+- [x] `useForm`, `useAsync` hook tests
+- [x] `ExerciseForm` component test
 
 ## M11: Deploy front end
 - [ ] Vercel project, `VITE_API_URL`, SPA rewrite

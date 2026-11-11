@@ -77,7 +77,7 @@ Services get fake repositories, so business rules are tested in isolation:
 
 ### Component
 `ExerciseForm.test.tsx` with `render` + `@testing-library/user-event`:
-- submitting empty shows "Name is required" and doesn't call `onSubmit`;
+- submitting empty shows the name validation error ("Must be at least 2 characters") and doesn't call `onSubmit`;
 - filling the fields and choosing a muscle group calls `onSubmit` with the expected object;
 - in edit mode, fields are pre-filled.
 
