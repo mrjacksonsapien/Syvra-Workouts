@@ -11,8 +11,10 @@
   ],
   "scripts": {
     "dev": "npm run dev --workspaces --if-present",
-    "build:api": "npm run build -w apps/api",
-    "build:web": "npm run build -w apps/web",
+    "build:shared": "npm run build -w packages/shared",
+    "build:api": "npm run build:shared && npm run build -w apps/api",
+    "build:web": "npm run build:shared && npm run build -w apps/web",
+    "start:api": "npm run start -w apps/api",
     "test": "npm run test --workspaces --if-present",
     "lint": "eslint .",
     "typecheck": "npm run typecheck --workspaces --if-present",
