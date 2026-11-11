@@ -67,6 +67,14 @@ Why: SQL lives in one place, services read like plain business logic, services a
 
 Validation uses zod schemas from the shared package (`packages/shared`), imported by both the API and the web forms, so the rules are written once.
 
+## AI tools used
+
+This project was built with **Claude Code** (Anthropic's AI coding agent) as a pair-programmer, guided by the instructions in [`AGENTS.md`](AGENTS.md).
+
+- **What the AI did:** drafted the documentation in `docs/`, wrote most of the code and the unit tests, and helped configure Neon, Render and Vercel, which were new to me.
+- **What I did:** chose the stack and the architecture (asking the AI to justify each recommendation), defined the scope, reviewed the results, and made the trade-off decisions. For example, I noticed that exercises could not be added to or edited inside a workout, and chose to save each change immediately instead of rewriting the design around one transaction ([decision log](docs/01-architecture.md#decision-workout-exercises-saved-immediately-not-with-the-workout)).
+- **How it was checked:** lint, typecheck and Vitest tests (repositories, services, validation, hooks and a form component).
+
 ## Run locally
 
 Requirements: Node 24 (see `.nvmrc`) and Docker.
