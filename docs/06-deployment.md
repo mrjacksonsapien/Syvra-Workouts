@@ -59,7 +59,7 @@ Secrets live **only** in each host's dashboard (and in local `.env` files, which
 ## Step 2: API (Render)
 
 1. New → **Web Service** → connect the GitHub repo; runtime **Node**; branch `main`; root directory: repo root.
-2. Build command: `npm ci && npm run build:api`
+2. Build command: `npm ci --include=dev && npm run build:api` (`--include=dev` is needed because `NODE_ENV=production` makes `npm ci` skip devDependencies, including `typescript` and `@types/node`)
 3. Start command: `npm run start:api`
 4. Health check path: `/health`
 5. Environment: `DATABASE_URL`, `NODE_ENV=production`, `CORS_ORIGIN` (temporarily `http://localhost:5173`; updated in step 4).
