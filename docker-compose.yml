@@ -11,7 +11,7 @@ services:
     ports:
       - '5432:5432'
     volumes:
-      - db-data:/var/lib/postgresql/data
+      - db-data:/var/lib/postgresql
       - ./db/schema.sql:/docker-entrypoint-initdb.d/01-schema.sql:ro
       - ./db/seed.sql:/docker-entrypoint-initdb.d/02-seed.sql:ro
     healthcheck:
@@ -19,6 +19,24 @@ services:
       interval: 5s
       timeout: 5s
       retries: 10
+
+  # Express API with auto-restart on code changes. http://localhost:3000/health
+  api:
+    build:
+      context: .
+      dockerfile: apps/api/Dockerfile
+      target: dev
+    environment:
+      DATABASE_URL: postgres://syvra:syvra@db:5432/syvra
+      CORS_ORIGIN: http://localhost:5173
+      PORT: 3000
+    ports:
+      - '3000:3000'
+    volumes:
+      - ./apps/api/src:/app/apps/api/src
+    depends_on:
+      db:
+        condition: service_healthy
 
 volumes:
   db-data:
