@@ -11,6 +11,7 @@
 }
 
 .list {
+  container-type: inline-size; /* lets the rows adapt to the list's width */
   display: flex;
   flex-direction: column;
   gap: var(--space-2);

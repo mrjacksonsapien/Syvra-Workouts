@@ -1,4 +1,6 @@
-/* Phone: stacked card. Tablet and up: aligned columns. */
+/* Narrow container (phone, or inside a modal): stacked card. Wide container: aligned columns.
+   It reacts to the width of the list, not the screen, because the same row is used in the
+   workout modal. */
 .row {
   display: flex;
   flex-direction: column;
@@ -28,10 +30,10 @@
   gap: var(--space-2);
 }
 
-@media (min-width: 640px) {
+@container (min-width: 560px) {
   .row {
     display: grid;
-    grid-template-columns: 1fr 200px auto;
+    grid-template-columns: minmax(0, 1fr) 200px auto;
     align-items: center;
     gap: var(--space-3);
   }
