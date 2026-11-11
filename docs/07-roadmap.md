@@ -50,8 +50,8 @@ Build order: database and API are deployed **before** the front end. Each milest
 - [x] `web` service in docker-compose
 
 ## M8: Exercises pages
-- [ ] Exercises list + filter (URL param) + create/edit/delete (409 handled)
-- [ ] Exercise details + workouts using it
+- [x] Exercises list + filter (URL param) + create/edit/delete (409 handled)
+- [x] Exercise details + workouts using it
 
 ## M9: Workouts pages
 - [ ] Workouts list + create/edit/delete
