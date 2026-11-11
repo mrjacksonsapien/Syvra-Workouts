@@ -22,10 +22,10 @@ Build order: database and API are deployed **before** the front end. Each milest
 - [x] Schema tests
 
 ## M3: API skeleton
-- [ ] `config/env.ts`, `db/pool.ts`, `app.ts` (`createApp`), `server.ts`
-- [ ] `AppError` classes, `errorHandler`, `notFound`, `validate()`
-- [ ] `GET /health`
-- [ ] `api` service in docker-compose + Dockerfile
+- [x] `config/env.ts`, `db/pool.ts`, `app.ts` (`createApp`), `server.ts`
+- [x] `AppError` classes, `errorHandler`, `notFound`, `validate()`
+- [x] `GET /health`
+- [x] `api` service in docker-compose + Dockerfile
 
 ## M4: Repositories (+ tests)
 - [ ] `ExerciseRepository`, `WorkoutRepository`, `WorkoutExerciseRepository`
