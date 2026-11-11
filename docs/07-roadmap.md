@@ -28,8 +28,8 @@ Build order: database and API are deployed **before** the front end. Each milest
 - [x] `api` service in docker-compose + Dockerfile
 
 ## M4: Repositories (+ tests)
-- [ ] `ExerciseRepository`, `WorkoutRepository`, `WorkoutExerciseRepository`
-- [ ] Unit tests with a mocked pool
+- [x] `ExerciseRepository`, `WorkoutRepository`, `WorkoutExerciseRepository`
+- [x] Unit tests with a mocked pool
 
 ## M5: Services, controllers, routes
 - [ ] Exercises CRUD + `/exercises/:id/workouts`
