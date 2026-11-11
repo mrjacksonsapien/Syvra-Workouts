@@ -18,6 +18,14 @@ export function WorkoutsPage() {
   const [formTarget, setFormTarget] = useState<'new' | WorkoutSummary | null>(null);
   const [deleteTarget, setDeleteTarget] = useState<WorkoutSummary | null>(null);
 
+  // The form can change a workout's exercises without "saving", so closing it always reloads.
+  // (The modal also reports a close after we close it ourselves; the guard ignores that echo.)
+  function closeForm() {
+    if (formTarget === null) return;
+    setFormTarget(null);
+    reload();
+  }
+
   function afterChange() {
     setFormTarget(null);
     setDeleteTarget(null);
@@ -54,12 +62,12 @@ export function WorkoutsPage() {
       <Modal
         open={formTarget !== null}
         title={formTarget === 'new' ? 'New workout' : 'Edit workout'}
-        onClose={() => setFormTarget(null)}
+        onClose={closeForm}
       >
         <WorkoutForm
           workout={formTarget === 'new' || formTarget === null ? undefined : formTarget}
-          onSaved={afterChange}
-          onCancel={() => setFormTarget(null)}
+          onSaved={closeForm}
+          onCancel={closeForm}
         />
       </Modal>
 
